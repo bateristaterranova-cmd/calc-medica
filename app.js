@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Change the icons inside the button based on previous settings
     if (document.documentElement.classList.contains('dark')) {
-        lightIcon.classList.remove('hidden');
-    } else {
         darkIcon.classList.remove('hidden');
+    } else {
+        lightIcon.classList.remove('hidden');
     }
 
     themeToggleBtn.addEventListener('click', function () {
