@@ -74,11 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.value === 'urea') {
             ureaContainer.classList.remove('hidden');
             bunContainer.classList.add('hidden');
-            // document.getElementById('osmo-bun').value = ''; // Optional reset
         } else {
             ureaContainer.classList.add('hidden');
             bunContainer.classList.remove('hidden');
-            // document.getElementById('osmo-urea').value = ''; // Optional reset
         }
         calcOsmo(); // Recalculate
     });
@@ -291,4 +289,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     addCalcListeners(['star-pc', 'star-pi', 'star-pic', 'star-pii'], calcStarling);
+
+
+    // ---- Clear Buttons Logic ----
+    // Mapping format data-clear="type" directly to the calculation resets
+    const clearMappers = {
+        'mdrd': () => calcMDRD(),
+        'fena': () => calcFENa(),
+        'katz': () => calcKatz(),
+        'osmo': () => calcOsmo(),
+        'ag': () => calcAG(),
+        'star': () => calcStarling()
+    };
+
+    document.querySelectorAll('button[data-clear]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.getAttribute('data-clear');
+            const container = document.getElementById(`card-${type}`);
+            if (container) {
+                const inputs = container.querySelectorAll('input');
+                inputs.forEach(inp => {
+                    if (inp.type === 'checkbox' || inp.type === 'radio') {
+                        inp.checked = false;
+                    } else {
+                        inp.value = '';
+                    }
+                });
+
+                // Recalculate to clear outputs
+                if (clearMappers[type]) {
+                    clearMappers[type]();
+                }
+            }
+        });
+    });
+
+    // ---- Copy Buttons Logic ----
+    document.querySelectorAll('button[data-copy]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const type = btn.getAttribute('data-copy');
+            const resultVal = document.getElementById(`${type}-result`)?.textContent;
+            const interpVal = document.getElementById(`${type}-interpretation`)?.textContent;
+
+            if (resultVal && resultVal !== '--') {
+                const textToCopy = `Resultado: ${resultVal}\nInterpretación: ${interpVal || 'N/A'}`;
+
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+
+                    // Show "Copiado!" message
+                    const msgEl = document.getElementById(`${type}-copied`);
+                    if (msgEl) {
+                        msgEl.classList.remove('hidden');
+                        setTimeout(() => {
+                            msgEl.classList.add('hidden');
+                        }, 2000); // hide after 2 seconds
+                    }
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+            }
+        });
+    });
 });

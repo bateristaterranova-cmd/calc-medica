@@ -1,6 +1,6 @@
 {
-  "name": "MedCalc Pro",
-  "short_name": "MedCalc",
+  "name": "MediCalc Pro",
+  "short_name": "MediCalc",
   "description": "Calculadora médica rápida y moderna para el profesional de la salud.",
   "start_url": "./index.html",
   "display": "standalone",
