@@ -273,7 +273,7 @@
 
             <!-- MDRD-4 -->
             <div class="card" id="card-mdrd">
-                <div class="flex justify-between items-start mb-1">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-1">
                     <h3 class="text-base font-semibold text-card-title">Tasa de Filtrado Glomerular</h3>
                     <button
                         class="text-xs text-red-500 hover:text-red-700 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded transition-colors"
@@ -330,7 +330,7 @@
 
             <!-- FENa -->
             <div class="card" id="card-fena">
-                <div class="flex justify-between items-start mb-1">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-1">
                     <h3 class="text-base font-semibold text-card-title">Fracción de Excreción de Sodio</h3>
                     <button
                         class="text-xs text-red-500 hover:text-red-700 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded transition-colors"
@@ -396,7 +396,7 @@
 
             <!-- Sodio Corregido -->
             <div class="card" id="card-katz">
-                <div class="flex justify-between items-start mb-1">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-1">
                     <h3 class="text-base font-semibold text-card-title">Sodio Corregido por Hiperglucemia</h3>
                     <button
                         class="text-xs text-red-500 hover:text-red-700 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded transition-colors"
@@ -441,10 +441,10 @@
 
             <!-- Osmolaridad -->
             <div class="card" id="card-osmo">
-                <div class="flex justify-between items-start mb-1">
-                    <span class="flex items-center">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-1">
+                    <span class="flex flex-col sm:flex-row sm:items-center gap-2">
                         <h3 class="text-base font-semibold text-card-title">Osmolaridad Sérica Calculada</h3>
-                        <select id="osmo-type" class="text-xs input-field !w-auto !py-1 !px-2 ml-2 cursor-pointer">
+                        <select id="osmo-type" class="text-xs input-field !w-auto !py-1 !px-2 cursor-pointer">
                             <option value="urea">Fórmula con Urea</option>
                             <option value="bun">Fórmula con BUN</option>
                         </select>
@@ -510,7 +510,7 @@
 
             <!-- Anion Gap -->
             <div class="card" id="card-ag">
-                <div class="flex justify-between items-start mb-1">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-1">
                     <h3 class="text-base font-semibold text-card-title">Anión Gap (Brecha Aniónica)</h3>
                     <button
                         class="text-xs text-red-500 hover:text-red-700 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded transition-colors"
@@ -560,7 +560,7 @@
 
             <!-- Starling -->
             <div class="card" id="card-star">
-                <div class="flex justify-between items-start mb-1">
+                <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between mb-1">
                     <h3 class="text-base font-semibold text-card-title">Fuerzas de Starling</h3>
                     <button
                         class="text-xs text-red-500 hover:text-red-700 bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded transition-colors"
@@ -616,7 +616,7 @@
     </main>
 
     <footer class="mt-auto py-6 border-t border-gray-200 dark:border-gray-800 text-center text-xs text-muted">
-        <p>© 2026 MediCalc Pro | Versión 1.2</p>
+        <p>© 2026 MediCalc Pro | Versión 1.2.1</p>
         <p class="mt-1">Solo para fines educativos. No reemplaza el juicio clínico.</p>
     </footer>
 
