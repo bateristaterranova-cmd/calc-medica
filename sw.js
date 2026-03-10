@@ -1,4 +1,4 @@
-const CACHE_NAME = 'medcalc-v1.1';
+const CACHE_NAME = 'medicalc-v1.2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
