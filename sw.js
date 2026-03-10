@@ -9,12 +9,12 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', event => {
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => cache.addAll(ASSETS_TO_CACHE))
             .catch(err => console.error('Cache error', err))
     );
-    self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
@@ -29,16 +29,24 @@ self.addEventListener('activate', event => {
             );
         })
     );
+    self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                // Return cache if found, else fetch from network
-                return response || fetch(event.request).catch(() => {
-                    // Optional fallback here
+        fetch(event.request)
+            .then(networkResponse => {
+                // Return fresh data if available and optionally cache it
+                return caches.open(CACHE_NAME).then(cache => {
+                    if(event.request.method === 'GET') {
+                        cache.put(event.request, networkResponse.clone());
+                    }
+                    return networkResponse;
                 });
+            })
+            .catch(() => {
+                // Fallback to cache if network fails
+                return caches.match(event.request);
             })
     );
 });

@@ -351,4 +351,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // ---- PWA Service Worker Registration ----
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => console.log('SW success:', registration.scope))
+                .catch(err => console.error('SW failed:', err));
+
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
+            });
+        });
+    }
 });
